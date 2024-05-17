@@ -1,0 +1,79 @@
+### DATA IN MOTION CASE STUDY 2: Human Resources
+
+## Overview of the Project
+
+This human resources project involves analyzing data from three tables:
+
+- DEPARTMENTS
+- EMPLOYEES
+- PROJECTS
+
+To address the business problems and generate valuable insights, I utilized several MySQL functions, including:
+
+- Basic aggregations
+- Window functions
+- Date and Time functions
+- Joins
+- Group By and Order By
+
+This approach enables efficient data analysis and uncovers key patterns and trends within the human resources domain.
+
+## Business Problems and Solutions
+
+1. *Find the longest ongoing project for each department*
+   ```sql
+   SELECT b.department_id, a.name, DATEDIFF(a.end_date, a.start_date) AS project_days
+   FROM projects a
+   JOIN employees b ON b.department_id = a.department_id
+   GROUP BY a.name
+   ORDER BY project_days DESC;
+   ```
+
+2. *Find all employees who are not managers*
+   ```sql
+   SELECT a.name, a.job_title, a.department_id 
+   FROM departments b
+   RIGHT JOIN employees a ON a.id = b.id
+   WHERE manager_id IS NULL;
+   ```
+
+3. *Find all employees who have been hired after the start of a project in their department*
+   ```sql
+   SELECT e.name, e.hire_date 
+   FROM employees e
+   WHERE e.hire_date > 
+   (SELECT p.start_date 
+    FROM projects p 
+    WHERE p.department_id = e.department_id);
+   ```
+
+4. *Rank employees within each department based on their hire date (earliest hire gets the highest rank)*
+   ```sql
+   SELECT p.name, q.name, p.hire_date,
+   RANK() OVER(PARTITION BY p.department_id ORDER BY p.hire_date) AS ranking_per_department
+   FROM departments q
+   JOIN employees p ON q.id = p.department_id
+   JOIN projects r ON p.department_id = r.department_id;
+   ```
+
+5. *Find the duration between the hire date of each employee and the hire date of the next employee hired in the same department*
+   ```sql
+   SELECT d.name, e.hire_duration_days
+   FROM 
+   (SELECT department_id, DATEDIFF(MAX(hire_date), MIN(hire_date)) AS hire_duration_days 
+    FROM employees
+    GROUP BY department_id) AS e
+   INNER JOIN departments d ON e.department_id = d.id;
+   ```
+
+This structured approach helps in efficiently analyzing the data to uncover critical insights and trends within the human resources domain.
+
+![295594262-7ef27cda-563d-4910-946b-974c719372d8](https://github.com/JohnOyedijo/Human-Resources-SQL-Analysis/assets/170008850/9780eae2-a152-48ca-b76e-f51b55d62bd6)
+
+![295603551-b289354a-fa37-49c4-b583-5d8a323ca02e](https://github.com/JohnOyedijo/Human-Resources-SQL-Analysis/assets/170008850/462121b4-75f5-415d-a33a-a588275693dd)
+
+![295604025-f80174a3-fe4e-4a9b-ab53-bf09c1438c56](https://github.com/JohnOyedijo/Human-Resources-SQL-Analysis/assets/170008850/1037d2ed-0c63-4d0a-a14f-6812f06e6d4f)
+
+![295605086-b7023b6b-cbfe-4fd4-a2b1-75943e8457e3](https://github.com/JohnOyedijo/Human-Resources-SQL-Analysis/assets/170008850/2bea0147-3558-4f6c-bb1c-87213a74ce4f)
+
+![295605436-5de0553c-0239-4de0-8538-24d515dfcb5d](https://github.com/JohnOyedijo/Human-Resources-SQL-Analysis/assets/170008850/54379a29-17ea-4807-84b4-e1065b3ac8ee)
