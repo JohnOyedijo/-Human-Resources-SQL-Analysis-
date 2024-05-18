@@ -20,7 +20,7 @@ This approach enables efficient data analysis and uncovers key patterns and tren
 
 ## Business Problems and Solutions
 
-1. **Find the longest ongoing project for each department**
+1. Find the longest ongoing project for each department
    ```sql
    SELECT b.department_id, a.name, DATEDIFF(a.end_date, a.start_date) AS project_days
    FROM projects a
@@ -29,7 +29,7 @@ This approach enables efficient data analysis and uncovers key patterns and tren
    ORDER BY project_days DESC;
    ```
 
-2. **Find all employees who are not managers**
+2. Find all employees who are not managers
    ```sql
    SELECT a.name, a.job_title, a.department_id 
    FROM departments b
@@ -37,7 +37,7 @@ This approach enables efficient data analysis and uncovers key patterns and tren
    WHERE manager_id IS NULL;
    ```
 
-3. **Find all employees who have been hired after the start of a project in their department**
+3. Find all employees who have been hired after the start of a project in their department
    ```sql
    SELECT e.name, e.hire_date 
    FROM employees e
@@ -47,7 +47,7 @@ This approach enables efficient data analysis and uncovers key patterns and tren
     WHERE p.department_id = e.department_id);
    ```
 
-4. **Rank employees within each department based on their hire date (earliest hire gets the highest rank)**
+4. Rank employees within each department based on their hire date (earliest hire gets the highest rank)
    ```sql
    SELECT p.name, q.name, p.hire_date,
    RANK() OVER(PARTITION BY p.department_id ORDER BY p.hire_date) AS ranking_per_department
@@ -56,7 +56,7 @@ This approach enables efficient data analysis and uncovers key patterns and tren
    JOIN projects r ON p.department_id = r.department_id;
    ```
 
-5. **Find the duration between the hire date of each employee and the hire date of the next employee hired in the same department**
+5. Find the duration between the hire date of each employee and the hire date of the next employee hired in the same department
    ```sql
    SELECT d.name, e.hire_duration_days
    FROM 
