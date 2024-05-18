@@ -67,8 +67,7 @@ This approach enables efficient data analysis and uncovers key patterns and tren
    ```
 
 This structured approach helps in efficiently analyzing the data to uncover critical insights and trends within the human resources domain.
-![SQL CODE 1](https://github.com/JohnOyedijo/-Human-Resources-SQL-Analysis-/assets/170008850/3060b8ec-00a1-462d-9ae6-843d4ed6f278)
-![SQL CODE 2](https://github.com/JohnOyedijo/-Human-Resources-SQL-Analysis-/assets/170008850/4190c882-c224-4e6d-ba01-8995a0f37476)
+
 ![solution to Question 1](https://github.com/JohnOyedijo/-Human-Resources-SQL-Analysis-/assets/170008850/6b85edcf-d62e-4f67-9ad9-ef9c46a5c0a2)
 ![Solution to Question 2](https://github.com/JohnOyedijo/-Human-Resources-SQL-Analysis-/assets/170008850/29678f7a-f595-4a0e-9ffe-dd4600f1f0d7)
 ![Solution to Question 3](https://github.com/JohnOyedijo/-Human-Resources-SQL-Analysis-/assets/170008850/daed56de-e95a-43ea-97d8-50744ed4de21)
